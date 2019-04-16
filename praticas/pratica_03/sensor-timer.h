@@ -15,8 +15,6 @@ static struct etimer et_sensor;
 /*---------------------------------------------------------------------------*/
 PROCESS(sensor_process, "Sensor process");
 /*---------------------------------------------------------------------------*/
-AUTOSTART_PROCESSES(&sensor_process);
-/*---------------------------------------------------------------------------*/
 PROCESS_THREAD(sensor_process, ev, data)
 {
   PROCESS_BEGIN();
@@ -48,4 +46,10 @@ PROCESS_THREAD(sensor_process, ev, data)
   }
 
   PROCESS_END();
+}
+int get_temp_average(void) {
+int avg = 0;
+for(int i=0; i<BUF_SIZE; i++)
+avg += buffer[i];
+return avg/BUF_SIZE;
 }
